@@ -8,7 +8,7 @@ const canvas = document.querySelector ('.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color('gray')
+scene.background = new THREE.Color('black')
 
 // Camera
 const camera = new THREE.PerspectiveCamera (
@@ -37,6 +37,13 @@ const testSphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
 
 scene.add(testSphere)
 
+// testTetrahedron
+const tetrahedronGeometry = new THREE.TetrahedronGeometry(2)
+const tetrahedronMaterial = new THREE.MeshNormalMaterial ()
+const testTetrahedron = new THREE.Mesh (tetrahedronGeometry, tetrahedronMaterial)
+
+scene.add(testTetrahedron)
+
 /*******************
 ** ANIMATION lOOP **
 ********************/
@@ -51,6 +58,9 @@ const animation = () =>
     console.log(Math.sin(elapsedTime))
     testSphere.position.y = Math.sin(elapsedTime)
 
+    // Animate testTetrahedron
+    console.log (Math.cos(elapsedTime))
+    testTetrahedron.position.x = Math.cos(elapsedTime)
 
     // Renderer
     renderer.render (scene, camera)
