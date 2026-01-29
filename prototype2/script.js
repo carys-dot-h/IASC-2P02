@@ -46,12 +46,12 @@ controls.enableDamping = true
 /***********
 ** MESHES **
 ************/
-// testSphere
-const sphereGeometry = new THREE.SphereGeometry(1)
-const sphereMaterial = new THREE.MeshNormalMaterial()
-const testSphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+// Dodecahedron
+const geometry = new THREE.DodecahedronGeometry(1)
+const material = new THREE.MeshNormalMaterial()
+const dodecahedron = new THREE.Mesh(geometry, material)
 
-scene.add(testSphere)
+scene.add(dodecahedron)
 
 // Plane
 const planeGeometry = new THREE.PlaneGeometry(10, 10, 50, 50)
@@ -82,24 +82,25 @@ const planeFolder = ui.addFolder('Plane')
 
 planeFolder
     .add(planeMaterial, 'wireframe')
-.name("Toggle Wireframe")
+    .name("Toggle Wireframe")
 
-// testSphere UI
-const sphereFolder = ui.addFolder('Sphere')
+// dodecahedron UI
+const dodecahedronFolder = ui.addFolder('Dodecahedron')
 
-sphereFolder
+dodecahedronFolder
     .add(uiObject, 'speed')
     .min(0.1)
     .max(10)
     .step(0.1)
     .name ('Speed')
 
-sphereFolder
+dodecahedronFolder
     .add(uiObject, 'distance')
     .min(0.1)
     .max(10)
     .step(0.1)
     .name('Distance')
+
 /*******************
 ** ANIMATION lOOP **
 ********************/
@@ -110,8 +111,8 @@ const animation = () =>
     // Return elapsedTime
     const elapsedTime = clock.getElapsedTime()
 
-    // Animate Sphere
-    testSphere.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
+    // Animate Dodecahedron
+    dodecahedron.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
 
     // Update OrbitControls
     controls.update()
