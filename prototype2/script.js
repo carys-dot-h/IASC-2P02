@@ -74,7 +74,8 @@ const ui = new dat.GUI()
 // UI Object
 const uiObject ={
     speed: 1,
-    distance: 1
+    distance: 1,
+    rotationSpeed: 0
 }
 
 // plane UI
@@ -101,6 +102,14 @@ dodecahedronFolder
     .step(0.1)
     .name('Distance')
 
+dodecahedronFolder
+    .add(uiObject, 'rotationSpeed')
+    .min(0)
+    .max(10)
+    .step(0.1)
+    .name ('Rotation')
+
+
 /*******************
 ** ANIMATION lOOP **
 ********************/
@@ -113,6 +122,9 @@ const animation = () =>
 
     // Animate Dodecahedron
     dodecahedron.position.y = Math.sin(elapsedTime * uiObject.speed) * uiObject.distance
+
+    // Rotate Dodecahedron
+    dodecahedron.rotation.x = elapsedTime * uiObject.rotationSpeed
 
     // Update OrbitControls
     controls.update()
