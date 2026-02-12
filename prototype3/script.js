@@ -72,21 +72,21 @@ torusKnot.castShadow = true
 const sphere1Geometry = new THREE.SphereGeometry
 const sphere1Material = new THREE.MeshNormalMaterial()
 const sphere1 = new THREE.Mesh (sphere1Geometry, sphere1Material)
-sphere1.position.set(5, 3, 3)
+sphere1.position.set(8, 3, 3)
 sphere1.castShadow = true
 scene.add(sphere1)
 
 const sphere2Geometry = new THREE.SphereGeometry
 const sphere2Material = new THREE.MeshNormalMaterial()
 const sphere2 = new THREE.Mesh (sphere2Geometry, sphere2Material)
-sphere2.position.set(5, 3, -3)
+sphere2.position.set(8, 3, -3)
 sphere2.castShadow = true
 scene.add(sphere2)
 
 const capsuleGeometry = new THREE.CapsuleGeometry(1, 5, 8, 16, 1)
 const capsuleMaterial = new THREE.MeshNormalMaterial()
 const capsule = new THREE.Mesh (capsuleGeometry, capsuleMaterial)
-capsule.position.set(5, 0, 0)
+capsule.position.set(8, 0, 0)
 capsule.castShadow = true
 capsule.rotation.x = Math.PI / 2
 scene.add(capsule)
