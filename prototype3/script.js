@@ -144,8 +144,8 @@ lightPositionFolder
 
 lightPositionFolder
     .add(directionalLight.position, 'x')
-    .min(-10)
-    .max(10)
+    .min(15)
+    .max(25)
     .step(0.1)
     .name('X')
 /*******************
