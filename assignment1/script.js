@@ -107,7 +107,7 @@ scene.add(bigLeaf)
 const branch1Geometry = new THREE.CylinderGeometry (1, 1, 5, 32)
 const branch1Material = new THREE.MeshNormalMaterial()
 const branch1 = new THREE.Mesh (branch1Geometry, branch1Material)
-branch1.position.set(15, 2.7, -1)
+branch1.position.set(15, 2.5, -1)
 branch1.castShadow = true
 branch1.rotation.x = Math.PI / 3.5
 scene.add(branch1)
@@ -128,7 +128,7 @@ branch3.position.set(15, 2.5, -8)
 branch3.rotation.x = Math.PI / 1.5
 
 // TRUNK
-const trunkGeometry = new THREE.CylinderGeometry (3, 2.5, 20, 32)
+const trunkGeometry = new THREE.CylinderGeometry (2.8, 2.5, 20, 32)
 const trunkMaterial = new THREE.MeshNormalMaterial ()
 const trunk = new THREE.Mesh (trunkGeometry, trunkMaterial)
 trunk.position.set(15, 2.5, -5.6)
@@ -267,14 +267,14 @@ const animation = () =>
     // part-one
     if(domObject.part === 1)
     {
-        camera.position.set(6, 0, 0)
+        camera.position.set(8, 0, 0)
         camera.lookAt(0, 0, 0)
     }
 
     // part-two
     if(domObject.part === 2)
     {
-        camera.position.set(30, 1, 0)
+        camera.position.set(40, 1, 0)
         camera.lookAt(0, 0, 0)
     }
 
