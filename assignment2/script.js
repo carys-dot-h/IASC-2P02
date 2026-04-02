@@ -48,6 +48,9 @@ const camera = new THREE.PerspectiveCamera(
 scene.add(camera)
 camera.position.set(0, 12, -20)
 
+// Fog
+const fogColor = new THREE.Color('purple')
+scene.fog = new THREE.Fog(fogColor, 25, 10)
 // Renderer
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -75,12 +78,39 @@ const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
 const drawCube = (height, params) => 
     {
     // Create cube material
-    const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(params.color)
+    let material
+    if(params.transparent)
+    {
+        material = new THREE.MeshStandardMaterial({
+            color: new THREE.Color(params.color),
+            transparent: true,
+            flatShading: (params.flatShading),
+            fog: (params.fog),
+            opacity: (params.opacity),
+            metalness: (params.metalness),
+            roughness: (params.roughness),
+            wireframe: (params.wireframe)
+        })
+    } else {
+        material = new THREE.MeshStandardMaterial({
+            color: new THREE.Color(params.color),
+            transparent: true,
+            flatShading: (params.flatShading),
+            fog:(params.fog),
+            opacity: 1.0,
+            metalness: (params.metalness),
+            roughness: (params.roughness),
+            wireframe: (params.wireframe)
     })
+    }
+
+    
 
     // Create cube
     const cube = new THREE.Mesh(cubeGeometry, material)
+
+    // Darken cube
+    
 
     // Position cube
     cube.position.x = (Math.random() - 0.5) * params.diameter
@@ -102,10 +132,6 @@ const drawCube = (height, params) =>
     params.group.add(cube)
 }
 
-//drawCube(0, 'red')
-//drawCube(1, 'green')
-//drawCube(2, 'yellow')
-//drawCube(3, 'blue')
 
 /*******
 ** UI **
@@ -124,36 +150,60 @@ const group3 = new THREE.Group()
 scene.add(group3)
 
 const uiObj = {
-    sourceText: "The quick brown fox jumped over the lazy dog.",
+    sourceText: "",
     saveSourceText() {
         saveSourceText ()
     },
     term1: {
-        term: 'fox',
-        color: '#aa00ff',
-        diameter: 10,
+        term: 'frodo',
+        color: '#75ff7a',
+        diameter: 5,
+        flatShading: false,
+        fog: true,
         group: group1,
-        nCubes: 100,
+        nCubes: 65,
+        metalness: 0,
+        opacity: 1.0,
         randomized: true,
-        scale: 1
+        reflectivity: 20,
+        roughness: 5,
+        scale: 0.75,
+        transparent: true,
+        wireframe: false
     },
     term2: {
-        term: 'dog',
-        color: '#00ffaa',
+        term: 'boromir',
+        color: '#2731c7',
         diameter: 10,
+        flatShading: false,
+        fog: false,
         group: group2,
-        nCubes: 100,
+        nCubes: 50,
+        metalness: 0,
+        opacity: 0.75,
         randomized: true,
-        scale: 1
+        reflectivity: 0,
+        roughness: 1,
+        scale: 1.5,
+        transparent: true,
+        wireframe: false
     },
     term3: {
-        term: '',
-        color: '',
-        diameter: 10,
+        term: 'ring',
+        color: '#ff4000',
+        diameter: 30,
+        flatShading: true,
+        fog: false,
         group: group3,
-        nCubes: 100,
+        nCubes: 150,
+        metalness: 10.0,
+        opacity: 1.0,
         randomized: true,
-        scale: 1
+        reflectivity: 0,
+        roughness: 1,
+        scale: 0.5,
+        transparent: true,
+        wireframe: true
     },
     saveTerms() {
         saveTerms()
@@ -296,13 +346,6 @@ const findSearchTermInTokenizedText = (params) =>
     }
 }
 
-
-//findSearchTermInTokenizedText("morganthe", "darkred")
-//findSearchTermInTokenizedText("magic", "aqua")
-//findSearchTermInTokenizedText("spiral", "royalblue")
-//findSearchTermInTokenizedText("raven", "black")
-//findSearchTermInTokenizedText("her", "darkslategray")
-
 /*******************
 ** ANIMATION lOOP **
 ********************/
@@ -320,7 +363,7 @@ const animation = () => {
     {
         camera.position.x = Math.sin(elapsedTime * 0.1) * 20
         camera.position.z = Math.cos(elapsedTime * 0.1) * 20
-        camera.position.y = 5
+        camera.position.y = 7.5
         camera.lookAt(0, 0, 0)
     }
 
